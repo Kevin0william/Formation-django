@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours Django - Formation Django</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0C4B33 0%, #44B78B 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* position: sticky; */
+            position: relative;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            margin-bottom: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: white;
+            color: #0C4B33;
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-top: 1rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #0C4B33;
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        /* ===== DESIGN MODERNE DES CARTES DE COURS ===== */
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+            justify-items: center;
+            align-items: start;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+        /* Carte de cours */
+        
+        .lesson-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 18px;
+            padding: 1.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            height: 350px;
+            /* plus longue */
+            max-width: 320px;
+            /* moins large */
+            margin: auto auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(68, 183, 139, 0.3);
+            border-color: #44B78B;
+        }
+        /* Numéro de niveau */
+        
+        .lesson-number {
+            background: linear-gradient(145deg, #0C4B33, #44B78B);
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(68, 183, 139, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .lesson-card:hover .lesson-number {
+            transform: rotate(8deg) scale(1.1);
+            box-shadow: 0 6px 14px rgba(68, 183, 139, 0.5);
+        }
+        /* Titre et description */
+        
+        .lesson-card h3 {
+            color: #0C4B33;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .lesson-card p {
+            text-align: center;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        /* Animation d’apparition fluide */
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .lesson-card {
+            animation: fadeUp 0.6s ease forwards;
+        }
+        /* ===== RESPONSIVE DESIGN ===== */
+        
+        @media (max-width: 992px) {
+            .lesson-card {
+                max-width: 90%;
+                height: auto;
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .lesson-card {
+                height: auto;
+                padding: 1.3rem;
+                border-radius: 15px;
+            }
+            .lesson-number {
+                width: 48px;
+                height: 48px;
+                font-size: 1.1rem;
+                border-radius: 10px;
+            }
+            .lesson-card h3 {
+                font-size: 1.2rem;
+            }
+            .lesson-card p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .lesson-modal-body {
+            padding: 3rem;
+            overflow-y: auto;
+            flex-grow: 1;
+            margin: auto auto;
+        }
+        
+        .lesson-content h3 {
+            color: #0C4B33;
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .lesson-content h4 {
+            color: #44B78B;
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .lesson-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .lesson-content ul,
+        .lesson-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #44B78B;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #0C4B33;
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: #0C4B33;
+        }
+        
+        .note {
+            background: #e8f5e9;
+            border-left: 5px solid #44B78B;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+        
+        .note strong {
+            color: #0C4B33;
+        }
+        
+        footer {
+            background: #0C4B33;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2rem;
+                padding: 0.4rem 1rem;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .lessons-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .lesson-modal-content {
+                width: 98%;
+                height: 95vh;
+                margin: 1% auto;
+            }
+            .lesson-modal-header {
+                padding: 1.5rem;
+            }
+            .lesson-modal-header h2 {
+                font-size: 1.5rem;
+            }
+            .lesson-modal-body {
+                padding: 1.5rem;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 2rem 1rem;
+            }
+            .code-block {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+            .copy-btn {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+        /* ===== MODAL (Fenêtre du cours) ===== */
+        
+        .lesson-modal {
+            display: none;
+            /* caché par défaut */
+            position: fixed;
+            inset: 0;
+            /* équivaut à top:0; right:0; bottom:0; left:0 */
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: all 0.3s ease;
+        }
+        /* Quand le modal est affiché (par JS) */
+        
+        .lesson-modal.show {
+            display: flex !important;
+        }
+        /* Contenu du modal */
+        
+        .lesson-modal-content {
+            background: #fff;
+            width: 85%;
+            max-width: 1100px;
+            height: 85vh;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            animation: fadeInModal 0.4s ease;
+        }
+        
+        .lesson-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #0C4B33 0%, #44B78B 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        
+        .lesson-modal-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        /* Responsive modal */
+        
+        @media (max-width: 768px) {
+            .lesson-modal-content {
+                width: 95%;
+                height: 90vh;
+                margin: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-text">FD</span>
+        </div>
+        <h1>Formation Django</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2 class="page-title">Les Cours Django</h2>
+            <p class="page-subtitle">Cliquez sur une leçon pour commencer votre apprentissage</p>
+            <div id="lessonsGrid" class="lessons-grid"></div>
+        </div>
+    </main>
+
+    <div id="lessonModal" class="lesson-modal">
+        <div class="lesson-modal-content">
+            <div class="lesson-modal-header">
+                <div>
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDescription"></p>
+                </div>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="lesson-modal-body">
+                <div id="lessonContent" class="lesson-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Formation Django. Tous droits réservés.</p>
+    </footer>
+
+    <script src="django.js"></script>
+    <script>
+        function openLesson(lesson) {
+            const modal = document.getElementById("lessonModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDescription = document.getElementById("modalDescription");
+            const lessonContent = document.getElementById("lessonContent");
+
+            modal.classList.add("show"); // ✅ centré avec flex
+            modalTitle.textContent = lesson.title;
+            modalDescription.textContent = lesson.description;
+            lessonContent.innerHTML = lesson.content;
+        }
+
+        document.getElementById("closeModal").addEventListener("click", () => {
+            document.getElementById("lessonModal").classList.remove("show");
+        });
+    </script>
+</body>
+
+</html>

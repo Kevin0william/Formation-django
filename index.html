@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Django - Maîtrisez Django</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-text">FD</span>
+        </div>
+        <h1>Formation Django</h1>
+    </header>
+
+    <main>
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>Qu'est-ce que Django ?</h2>
+                    <div class="intro-grid">
+                        <div class="intro-card">
+                            <h3>L'Histoire</h3>
+                            <p>Django a été créé en 2003 par Adrian Holovaty et Simon Willison au sein du journal Lawrence Journal-World. Rendu public en 2005, il est devenu l'un des frameworks web les plus populaires au monde.</p>
+                        </div>
+                        <div class="intro-card">
+                            <h3>La Puissance</h3>
+                            <p>Django est un framework web Python de haut niveau qui encourage le développement rapide et une conception propre et pragmatique. Il gère une grande partie du travail du développement web, permettant de se concentrer sur l'écriture
+                                d'applications sans réinventer la roue.</p>
+                        </div>
+                        <div class="intro-card">
+                            <h3>Pourquoi Django ?</h3>
+                            <p>Créé pour répondre aux délais serrés des salles de rédaction tout en satisfaisant les exigences des développeurs web expérimentés, Django offre sécurité, évolutivité et rapidité. Des sites comme Instagram, Pinterest et Mozilla
+                                l'utilisent.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-section">
+                    <h2>Notre Mission</h2>
+                    <p>Notre objectif est de vous accompagner dans votre apprentissage de Django, du niveau débutant au niveau avancé. Que vous soyez amateur ou développeur souhaitant élargir vos compétences, nos cours structurés vous guideront étape par
+                        étape.</p>
+                    <p>Nous couvrons tout : de la création de votre premier projet Django à la mise en place d'interfaces interactives complexes, en passant par la gestion des bases de données et le déploiement en production.</p>
+                </div>
+
+                <div class="cta-section">
+                    <div class="cta-card" id="startBtn">
+                        <div class="cta-icon">🚀</div>
+                        <h3>Commencez Votre Aventure Django</h3>
+                        <p>Rejoignez des milliers de développeurs qui ont transformé leur carrière grâce à Django</p>
+                        <button class="cta-button">Accéder aux Cours</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="accessModal" class="modal">
+        <div class="modal-content access-modal">
+            <span class="close">&times;</span>
+            <h2>Accès aux Cours</h2>
+            <p>Veuillez entrer votre clé d'accès pour continuer</p>
+            <form id="accessForm">
+                <input type="password" id="accessKey" placeholder="Clé d'accès" required>
+                <button type="submit" class="submit-btn">Valider</button>
+                <p id="errorMessage" class="error-message"></p>
+            </form>
+            <div class="contact-section">
+                <p>Vous n'avez pas de clé d'accès ?</p>
+                <a href="https://wa.me/237670078114" target="_blank" class="contact-btn">
+                    Contacter le Créateur sur WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Formation Django. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
