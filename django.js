@@ -1777,7 +1777,9 @@ function openLesson(lesson) {
 
     attachCopyListeners();
 
-    modal.style.display = 'block';
+    modal.classList.add('show');
+
+
 }
 
 function createCodeBlock(code) {
@@ -1828,12 +1830,12 @@ const closeModal = document.getElementById('closeModal');
 const modal = document.getElementById('lessonModal');
 
 closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
+    modal.classList.remove('show');
 });
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
-        modal.style.display = 'none';
+        modal.classList.remove('show');
     }
 });
 
