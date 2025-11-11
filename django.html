@@ -474,17 +474,17 @@
 
     <script src="django.js"></script>
     <script>
-        function openLesson(lesson) {
-            const modal = document.getElementById("lessonModal");
-            const modalTitle = document.getElementById("modalTitle");
-            const modalDescription = document.getElementById("modalDescription");
-            const lessonContent = document.getElementById("lessonContent");
+        // function openLesson(lesson) {
+        //     const modal = document.getElementById("lessonModal");
+        //     const modalTitle = document.getElementById("modalTitle");
+        //     const modalDescription = document.getElementById("modalDescription");
+        //     const lessonContent = document.getElementById("lessonContent");
 
-            modal.classList.add("show"); // ✅ centré avec flex
-            modalTitle.textContent = lesson.title;
-            modalDescription.textContent = lesson.description;
-            lessonContent.innerHTML = lesson.content;
-        }
+        //     modal.classList.add("show"); // ✅ centré avec flex
+        //     modalTitle.textContent = lesson.title;
+        //     modalDescription.textContent = lesson.description;
+        //     lessonContent.innerHTML = lesson.content;
+        // }
 
         document.getElementById("closeModal").addEventListener("click", () => {
             document.getElementById("lessonModal").classList.remove("show");
